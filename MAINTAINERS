@@ -1,0 +1,20 @@
+List of maintainers and how to submit changes
+=============================================
+
+This repository contains code to building certain tools specifically for
+XenServer.
+
+If you do wish to submit code, please fork the repository on Github, work on
+your branch and then submit a pull request.
+
+Alternatively, if you have concerns or recommendations, please contact the
+maintainers listed below.
+
+Maintainers List
+----------------
+
+* Felipe Franciosi <felipe.franciosi@citrix.com>
+
+* Jonathan Davies <jonathan.davies@citrix.com>
+
+* Marcus Granado <marcus.granado@citrix.com>

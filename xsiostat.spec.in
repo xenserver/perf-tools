@@ -1,0 +1,35 @@
+# -*- rpm-spec -*-
+
+Summary: Tool for visualising XenServer VBD metrics
+Name:    xsiostat
+Version: @PT_VERSION@
+Release: @RPM_RELEASE@
+Group:   Development/Other
+License: LGPL+linking exception
+URL:  http://www.citrix.com/
+Source0: xsiostat-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+BuildRequires: gcc
+
+%description
+The xsiostat is a tool similar to iostat but that consider XenServer components such as I/O rings and memory pool buffers.
+
+%prep 
+%setup -q
+
+%build
+mkdir $RPM_BUILD_ROOT
+DESTDIR=$RPM_BUILD_ROOT %{__make}
+
+%install
+rm -rf %{buildroot}
+DESTDIR=$RPM_BUILD_ROOT@OPTDIR@/debug %{__make} install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root,-)
+@OPTDIR@/debug/xsiostat
+
+%changelog

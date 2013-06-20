@@ -1,0 +1,52 @@
+# -*- rpm-spec -*-
+
+Summary: Performance tools
+Name:    perf-tools
+Version: @PT_VERSION@
+Release: @RPM_RELEASE@
+Group:   System/Hypervisor
+License: LGPL+linking exception
+URL:  http://www.xenserver.org
+Source0: perf-tools-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+
+%description
+Performance tools
+
+%package xsiostat
+Summary: storage performance monitoring tool
+Group: System/Hypervisor
+
+%description xsiostat
+Storage performance monitoring tool
+
+%package xsifstat
+Summary: network performance monitoring tool
+Group: System/Hypervisor
+
+%description xsifstat
+Network performance monitoring tool
+
+%prep
+%setup -q
+
+%build
+mkdir -p $RPM_BUILD_ROOT
+DESTDIR=$RPM_BUILD_ROOT %{__make} compile
+
+%install
+rm -rf %{buildroot}
+DESTDIR=$RPM_BUILD_ROOT %{__make} install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files xsiostat
+%defattr(-,root,root,-)
+@OPTDIR@/debug/xsiostat
+
+%files xsifstat
+%defattr(-,root,root,-)
+@OPTDIR@/debug/xsifstat
+
+%changelog
