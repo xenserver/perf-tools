@@ -1,0 +1,34 @@
+# -*- rpm-spec -*-
+
+Summary: Tool for visualising XenServer VIF metrics
+Name:    xsifstat
+Version: @PT_VERSION@
+Release: @RPM_RELEASE@
+Group:   Development/Other
+License: LGPL+linking exception
+URL:  http://www.xenserver.org
+Source0: xsifstat-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+
+%description
+The xsifstat is a tool to expose metrics of the XenServer network subsystem on a per-VIF basis.
+
+%prep
+%setup -q
+
+%build
+mkdir -p $RPM_BUILD_ROOT
+DESTDIR=$RPM_BUILD_ROOT %{__make}
+
+%install
+rm -rf %{buildroot}
+DESTDIR=$RPM_BUILD_ROOT@OPTDIR@/debug %{__make} install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files xsifstat
+%defattr(-,root,root,-)
+@OPTDIR@/debug/xsifstat
+
+%changelog
