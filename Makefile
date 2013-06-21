@@ -31,7 +31,9 @@ $(MY_SOURCES)/MANIFEST: $(MY_OUTPUT_DIR)/SRPMS
 .PHONY: srpm
 srpm: $(PT_SPECS)
 	mkdir -p $(RPM_SOURCESDIR)
-	cd $(call git_loc,$(basename $<)) && git archive --prefix=$(basename $<)-$(PT_VERSION)/ HEAD | \
-		bzip2 > $(RPM_SOURCESDIR)/$(basename $<)-$(PT_VERSION).tar.bz2
 	mkdir -p $(RPM_SRPMSDIR)
-	$(RPMBUILD) --target $(DOMAIN0_ARCH_OPTIMIZED) -bs $<
+	$(foreach compspec,$^,\
+		cd $(call git_loc,$(basename $(compspec))) && \
+			git archive --prefix=$(basename $(compspec))-$(PT_VERSION)/ HEAD | \
+			bzip2 > $(RPM_SOURCESDIR)/$(basename $(compspec))-$(PT_VERSION).tar.bz2;\
+		cd - && $(RPMBUILD) --target $(DOMAIN0_ARCH_OPTIMIZED) -bs $(compspec);)

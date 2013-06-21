@@ -27,7 +27,7 @@ DESTDIR=$RPM_BUILD_ROOT@OPTDIR@/debug %{__make} install
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files xsifstat
+%files
 %defattr(-,root,root,-)
 @OPTDIR@/debug/xsifstat
 
