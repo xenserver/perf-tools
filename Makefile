@@ -6,7 +6,7 @@ include $(B_BASE)/rpmbuild.mk
 OPTDIR=/opt/xensource
 
 PT_VERSION := 0.2.0
-PT_TARGETS := xsiostat xsifstat rrd2csv
+PT_TARGETS := xsiostat xsifstat rrd2csv rrdd-plugins
 
 PT_SPECS := $(PT_TARGETS:=.spec)
 

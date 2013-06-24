@@ -1,0 +1,54 @@
+# -*- rpm-spec -*-
+
+Summary: RRDD metrics plugins
+Name:    rrdd-plugins
+Version: @PT_VERSION@
+Release: @RPM_RELEASE@
+Group:   System/Hypervisor
+License: LGPL+linking exception
+URL:  http://www.xenserver.org
+Source0: rrdd-plugins-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+
+%description
+This package contains plugins registering to the RRD daemon and exposing various metrics.
+
+%prep
+%setup -q
+
+%build
+mkdir -p $RPM_BUILD_ROOT
+DESTDIR=$RPM_BUILD_ROOT %{__make}
+
+%install
+rm -rf %{buildroot}
+DESTDIR=$RPM_BUILD_ROOT %{__make} install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%pre
+# Attempt to stop the plugins if we're not in the host installer and they have already been installed
+[ -z "$XS_INSTALLATION" ] && [ $1 -eq 2 ] && service xcp-rrdd-plugins stop
+exit 0
+
+%post
+[ ! -x /sbin/chkconfig ] || chkconfig --add xcp-rrdd-plugins
+# Start the plugins now if we're not in the host installer
+[ -z "$XS_INSTALLATION" ] && service xcp-rrdd-plugins start
+exit 0
+
+%preun
+[ ! -x /sbin/chkconfig ] || chkconfig --del xcp-rrdd-plugins
+
+%files
+%defattr(-,root,root,-)
+/etc/rc.d/init.d/xcp-rrdd-plugins
+/etc/sysconfig/xcp-rrdd-plugins
+@OPTDIR@/libexec/xcp-rrdd-plugins/xcp-rrdd-iostat
+@OPTDIR@/libexec/xcp-rrdd-plugins/xcp-rrdd-squeezed
+@OPTDIR@/libexec/xcp-rrdd-plugins/xcp-rrdd-xenpm
+/etc/xensource/bugtool/xcp-rrdd-plugins.xml
+/etc/xensource/bugtool/xcp-rrdd-plugins/stuff.xml
+
+%changelog
