@@ -1,0 +1,35 @@
+# -*- rpm-spec -*-
+
+Summary: Tool for converting Xen API RRDs to CSV
+Name:    rrd2csv
+Version: @PT_VERSION@
+Release: @RPM_RELEASE@
+Group:   System/Hypervisor
+License: LGPL+linking exception
+URL:  http://www.xenserver.org
+Source0: rrd2csv-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+
+%description
+This package contains the rrd2csv tool, useful to expose live RRDD metrics on standard output, in the CSV format.
+
+%prep
+%setup -q
+
+%build
+mkdir -p $RPM_BUILD_ROOT
+DESTDIR=$RPM_BUILD_ROOT %{__make}
+
+%install
+rm -rf %{buildroot}
+DESTDIR=$RPM_BUILD_ROOT %{__make} install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root,-)
+@OPTDIR@/bin/rrd2csv
+@OPTDIR@/man/man1/rrd2csv.1.man
+
+%changelog
