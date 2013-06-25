@@ -15,8 +15,8 @@ build: srpm $(MY_SOURCES)/MANIFEST
 	mkdir -p $(RPM_RPMSDIR)/$(DOMAIN_ZERO_OPTIMIZED)
 	$(RPMBUILD) --rebuild --target $(DOMAIN0_ARCH_OPTIMIZED) $(MY_OUTPUT_DIR)/SRPMS/*src.rpm
 	mkdir -p $(MY_MAIN_PACKAGES)
-	for dir in $(MODULES); do \
-		(cp $(MY_OUTPUT_DIR)/RPM/$(DOMAIN0_ARCH_OPTIMIZED)/$$dir-*.rpm $(MY_MAIN_PACKAGES)) \
+	for dir in $(PT_TARGETS); do \
+		(cp $(MY_OUTPUT_DIR)/RPMS/$(DOMAIN0_ARCH_OPTIMIZED)/$$dir-$(PT_VERSION)-*.rpm $(MY_MAIN_PACKAGES)) \
 	done
 
 $(MY_SOURCES)/MANIFEST: $(MY_OUTPUT_DIR)/SRPMS
