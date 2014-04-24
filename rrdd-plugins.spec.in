@@ -39,7 +39,9 @@ exit 0
 exit 0
 
 %preun
-[ ! -x /sbin/chkconfig ] || chkconfig --del xcp-rrdd-plugins
+# Run chkconfig --del if this is an uninstall (rather than an upgrade)
+[ $1 -eq 0 ] && [ -x /sbin/chkconfig ] && chkconfig --del xcp-rrdd-plugins
+exit 0
 
 %files
 %defattr(-,root,root,-)
