@@ -30,6 +30,8 @@ mkdir -p $RPM_BUILD_ROOT
 DESTDIR=$RPM_BUILD_ROOT %{__make}
 
 %install
+mkdir -p %{buildroot}%{_libdir}/ocaml
+export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 DESTDIR=$RPM_BUILD_ROOT %{__make} install
 
 %clean
