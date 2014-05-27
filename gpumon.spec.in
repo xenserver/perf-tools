@@ -1,0 +1,55 @@
+# -*- rpm-spec -*-
+
+Summary: RRDD GPU metrics plugin
+Name:    gpumon
+Version: @PT_VERSION@
+Release: @RPM_RELEASE@
+Group:   System/Hypervisor
+License: LGPL+linking exception
+URL:  http://www.xenserver.org
+Source0: gpumon-%{version}.tar.bz2
+Source1: tdk_5.319.43.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+
+%description
+This package contains a plugin registering to the RRD daemon and exposing GPU metrics.
+
+%prep
+%setup -q
+cd $RPM_BUILD_DIR
+tar zxvf /obj/SOURCES/tdk_5.319.43.tar.gz
+cp $RPM_BUILD_DIR/tdk_5.319.43/nvml/include/nvml.h /usr/include
+
+%build
+mkdir -p $RPM_BUILD_ROOT
+DESTDIR=$RPM_BUILD_ROOT %{__make}
+
+%install
+rm -rf %{buildroot}
+DESTDIR=$RPM_BUILD_ROOT %{__make} install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%pre
+# Attempt to stop the plugins if we're not in the host installer and they have already been installed
+[ -z "$XS_INSTALLATION" ] && [ $1 -eq 2 ] && service xcp-rrdd-plugins stop
+exit 0
+
+%post
+[ ! -x /sbin/chkconfig ] || chkconfig --add xcp-rrdd-gpumon
+# Start the plugins now if we're not in the host installer
+[ -z "$XS_INSTALLATION" ] && service xcp-rrdd-plugingpumon
+exit 0
+
+%preun
+# Run chkconfig --del if this is an uninstall (rather than an upgrade)
+[ $1 -eq 0 ] && [ -x /sbin/chkconfig ] && chkconfig --del xcp-rrdd-gpumon
+exit 0
+
+%files
+%defattr(-,root,root,-)
+/etc/rc.d/init.d/xcp-rrdd-gpumon
+@OPTDIR@/libexec/xcp-rrdd-plugins/xcp-rrdd-gpumon
+
+%changelog

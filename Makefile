@@ -7,10 +7,13 @@ OPTDIR=/opt/xensource
 
 PT_VERSION := 0.2.0
 PT_LIBS    := rrdd-plugin-legacy
-PT_PROGS   := xsiostat xsifstat rrd2csv rrdd-plugins
+PT_PROGS   := xsiostat xsifstat rrd2csv rrdd-plugins gpumon
 PT_TARGETS := $(PT_LIBS) $(PT_PROGS)
 
 PT_SPECS := $(PT_TARGETS:=.spec)
+
+TDK_PREFIX  := tdk_5.319.43
+TDK_TARBALL := $(CARBON_DISTFILES)/$(TDK_PREFIX).tar.gz
 
 .PHONY: build
 build: srpm $(MY_SOURCES)/MANIFEST
@@ -39,6 +42,7 @@ $(MY_SOURCES)/MANIFEST: $(MY_OUTPUT_DIR)/SRPMS
 .PHONY: srpm
 srpm: $(PT_SPECS)
 	mkdir -p $(RPM_SOURCESDIR)
+	cp $(TDK_TARBALL) $(RPM_SOURCESDIR)
 	mkdir -p $(RPM_SRPMSDIR)
 	$(foreach compspec,$^,\
 		cd $(call git_loc,$(basename $(compspec))) && \
