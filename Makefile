@@ -15,10 +15,16 @@ PT_SPECS := $(PT_TARGETS:=.spec)
 .PHONY: build
 build: srpm $(MY_SOURCES)/MANIFEST
 	mkdir -p $(RPM_RPMSDIR)/$(DOMAIN_ZERO_OPTIMIZED)
-	$(RPMBUILD) --rebuild --target $(DOMAIN0_ARCH_OPTIMIZED) $(MY_OUTPUT_DIR)/SRPMS/*src.rpm
+	# Build the library RPMs and install them in the chroot
+	for dir in $(PT_LIBS); do \
+		$(RPMBUILD) --rebuild --target $(DOMAIN0_ARCH_OPTIMIZED) $(MY_OUTPUT_DIR)/SRPMS/$$dir-$(PT_VERSION)-*.src.rpm; \
+		rpm -Uvh --force $(MY_OUTPUT_DIR)/RPMS/$(DOMAIN0_ARCH_OPTIMIZED)/$$dir*-$(PT_VERSION)-*.rpm; \
+	done
+	# Build the RPMs we want installed on XenServer, and copy them to PACKAGES.main
 	mkdir -p $(MY_MAIN_PACKAGES)
-	for dir in $(PT_TARGETS); do \
-		(cp $(MY_OUTPUT_DIR)/RPMS/$(DOMAIN0_ARCH_OPTIMIZED)/$$dir-$(PT_VERSION)-*.rpm $(MY_MAIN_PACKAGES)) \
+	for dir in $(PT_PROGS); do \
+		($(RPMBUILD) --rebuild --target $(DOMAIN0_ARCH_OPTIMIZED) $(MY_OUTPUT_DIR)/SRPMS/$$dir-$(PT_VERSION)-*.src.rpm; \
+		cp $(MY_OUTPUT_DIR)/RPMS/$(DOMAIN0_ARCH_OPTIMIZED)/$$dir-$(PT_VERSION)-*.rpm $(MY_MAIN_PACKAGES)); \
 	done
 
 $(MY_SOURCES)/MANIFEST: $(MY_OUTPUT_DIR)/SRPMS
