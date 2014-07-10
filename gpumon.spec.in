@@ -8,7 +8,7 @@ Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xenserver.org
 Source0: gpumon-%{version}.tar.bz2
-Source1: tdk_5.319.43.tar.gz
+Source1: gdk_331_62_release.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -17,8 +17,8 @@ This package contains a plugin registering to the RRD daemon and exposing GPU me
 %prep
 %setup -q
 cd $RPM_BUILD_DIR
-tar zxvf /obj/SOURCES/tdk_5.319.43.tar.gz
-cp $RPM_BUILD_DIR/tdk_5.319.43/nvml/include/nvml.h /usr/include
+tar zxvf /obj/SOURCES/gdk_331_62_release.tgz
+cp $RPM_BUILD_DIR/gdk_linux_amd64_release/nvml/include/nvml.h /usr/include
 
 %build
 mkdir -p $RPM_BUILD_ROOT

@@ -12,8 +12,7 @@ PT_TARGETS := $(PT_LIBS) $(PT_PROGS)
 
 PT_SPECS := $(PT_TARGETS:=.spec)
 
-TDK_PREFIX  := tdk_5.319.43
-TDK_TARBALL := $(CARBON_DISTFILES)/$(TDK_PREFIX).tar.gz
+GDK_TARBALL := $(CARBON_DISTFILES)/gdk_331_62_release.tgz
 
 .PHONY: build
 build: srpm $(MY_SOURCES)/MANIFEST
@@ -42,7 +41,7 @@ $(MY_SOURCES)/MANIFEST: $(MY_OUTPUT_DIR)/SRPMS
 .PHONY: srpm
 srpm: $(PT_SPECS)
 	mkdir -p $(RPM_SOURCESDIR)
-	cp $(TDK_TARBALL) $(RPM_SOURCESDIR)
+	cp $(GDK_TARBALL) $(RPM_SOURCESDIR)
 	mkdir -p $(RPM_SRPMSDIR)
 	$(foreach compspec,$^,\
 		cd $(call git_loc,$(basename $(compspec))) && \
