@@ -10,6 +10,7 @@ Group:          System/Hypervisor
 URL:            https://github.com/xenserver/rrd2csv/
 Source0:        git://github.com/xenserver/rrd2csv
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:  ocaml
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  xapi-client-devel
 
