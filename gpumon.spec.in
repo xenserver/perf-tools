@@ -37,7 +37,7 @@ rm -rf $RPM_BUILD_ROOT
 exit 0
 
 %post
-[ ! -x /sbin/chkconfig ] || chkconfig --add xcp-rrdd-gpumon
+[ -x /sbin/chkconfig ] && chkconfig --add xcp-rrdd-gpumon
 # Start the plugin now if we're not in the host installer
 [ -z "$XS_INSTALLATION" ] && service xcp-rrdd-gpumon start
 exit 0

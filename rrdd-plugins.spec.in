@@ -33,7 +33,7 @@ rm -rf $RPM_BUILD_ROOT
 exit 0
 
 %post
-[ ! -x /sbin/chkconfig ] || chkconfig --add xcp-rrdd-plugins
+[ -x /sbin/chkconfig ] && chkconfig --add xcp-rrdd-plugins
 # Start the plugins now if we're not in the host installer
 [ -z "$XS_INSTALLATION" ] && service xcp-rrdd-plugins start
 exit 0
