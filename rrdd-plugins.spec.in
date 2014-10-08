@@ -38,16 +38,8 @@ DESTDIR=%{buildroot} %{__make} install
 %clean
 rm -rf %{buildroot}
 
-%pre
-# Attempt to stop the plugins if we're not in the host installer and they have
-# already been installed
-[ -z "$XS_INSTALLATION" ] && [ $1 -eq 2 ] && service xcp-rrdd-plugins stop
-exit 0
-
 %post
 [ -x /sbin/chkconfig ] && chkconfig --add xcp-rrdd-plugins
-# Start the plugins now if we're not in the host installer
-[ -z "$XS_INSTALLATION" ] && service xcp-rrdd-plugins start
 exit 0
 
 %preun
