@@ -14,6 +14,8 @@ BuildRequires:  ocaml
 BuildRequires:  omake
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  xapi-client-devel
+BuildRequires:  ocaml-xen-api-libs-transitional-devel
+BuildRequires:  ocaml-xcp-rrd-devel
 
 %description
 This package contains the rrd2csv tool, useful to expose live RRDD metrics on

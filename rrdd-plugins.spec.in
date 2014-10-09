@@ -18,6 +18,9 @@ BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenops-devel
 BuildRequires:  ocaml-xenstore-devel
+BuildRequires:  ocaml-xcp-rrd-devel
+BuildRequires:  xen-dom0-libs-devel
+BuildRequires:  xen-libs-devel
 Requires:       xsifstat
 Requires:       xsiostat
 
