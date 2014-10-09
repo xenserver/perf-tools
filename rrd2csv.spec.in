@@ -1,35 +1,42 @@
-# -*- rpm-spec -*-
+%define planex_version 0.0.0
+%define planex_release 1
 
-Summary: Tool for converting Xen API RRDs to CSV
-Name:    rrd2csv
-Version: @PT_VERSION@
-Release: @RPM_RELEASE@
-Group:   System/Hypervisor
-License: LGPL+linking exception
-URL:  http://www.xenserver.org
-Source0: rrd2csv-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
+Name:           rrd2csv
+Version:        %{planex_version}
+Release:        %{planex_release}
+Summary:        Tool for converting Xen API RRDs to CSV
+License:        LGPL+linking exception
+Group:          System/Hypervisor
+URL:            https://github.com/xenserver/rrd2csv/
+Source0:        git://github.com/xenserver/rrd2csv
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:  ocaml
+BuildRequires:  ocaml-xcp-idl-devel
+BuildRequires:  xapi-client-devel
 
 %description
-This package contains the rrd2csv tool, useful to expose live RRDD metrics on standard output, in the CSV format.
+This package contains the rrd2csv tool, useful to expose live RRDD metrics on
+standard output, in the CSV format.
 
 %prep
 %setup -q
 
 %build
-mkdir -p $RPM_BUILD_ROOT
-DESTDIR=$RPM_BUILD_ROOT %{__make}
+mkdir -p %{buildroot}
+DESTDIR=%{buildroot} %{__make}
 
 %install
 rm -rf %{buildroot}
-DESTDIR=$RPM_BUILD_ROOT %{__make} install
+DESTDIR=%{buildroot} %{__make} install
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-@OPTDIR@/bin/rrd2csv
-@OPTDIR@/man/man1/rrd2csv.1.man
+/opt/xensource/bin/rrd2csv
+/opt/xensource/man/man1/rrd2csv.1.man
 
 %changelog
+* Fri Jul 11 2014 John Else <john.else@citrix.com> - 0.1.0-1
+- Initial package for planex

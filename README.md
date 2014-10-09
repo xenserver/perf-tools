@@ -6,7 +6,7 @@ performance tools.
 
 At this moment, these are:
 
-* xsiostat     (http://github.com/xenserver/xsiostat)
-* xsifstat     (http://github.com/xenserver/xsifstat)
-* rrd2csv      (TBD)
-* rrdd-plugins (TBD)
+* xsiostat     (https://github.com/xenserver/xsiostat)
+* xsifstat     (https://github.com/xenserver/xsifstat)
+* rrd2csv      (https://github.com/xenserver/rrd2csv)
+* rrdd-plugins (https://github.com/xenserver/rrdd-plugins)
