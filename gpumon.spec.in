@@ -30,6 +30,9 @@ metrics.
 mkdir -p %{buildroot}
 DESTDIR=%{buildroot} %{__make}
 
+%check
+%{__make} test
+
 %install
 rm -rf %{buildroot}
 DESTDIR=%{buildroot} %{__make} install
