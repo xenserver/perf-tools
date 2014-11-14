@@ -16,7 +16,7 @@ BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml-rrdd-plugin-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
-BuildRequires:  ocaml-xen-lowlevel-libs-devel
+BuildRequires:  xen-ocaml-devel
 BuildRequires:  ocaml-xenops-devel
 BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-xcp-rrd-devel
