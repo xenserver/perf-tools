@@ -9,7 +9,6 @@ Group:          System/Hypervisor
 License:        LGPL+linking exception
 URL:            https://github.com/xenserver/gpumon
 Source0:        git://github.com/xenserver/gpumon
-Source1:        http://developer.download.nvidia.com/compute/cuda/6_0/rel/gdk/gdk_331_62_release.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 BuildRequires:  gdk-devel
 BuildRequires:  ocaml
