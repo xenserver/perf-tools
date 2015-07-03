@@ -1,0 +1,37 @@
+# mock is in both /usr/sbin and /usr/bin, but it is the version in /usr/bin that should 
+# executed. The build system has /usr/sbin first in the path which leads to permission
+# problems.
+PATH:=/usr/bin:$(PATH)
+FETCH_EXTRA_FLAGS=--mirror file:///distfiles/ocaml2
+
+.PHONY: buildrpms perf-tools
+
+perf-tools: buildrpms /output/perf-tools/SOURCES/MANIFEST 
+
+/output/perf-tools/SOURCES/MANIFEST: buildrpms
+	mkdir /output/perf-tools/SOURCES
+	for i in $(shell /bin/ls -1 SRPMS/*.rpm); do \
+		path=$${i}; \
+		echo -n "api-libs "; \
+		rpm --qf %{License} -qp $${path} | sed -e 's/ /_/g'; \
+		echo " file $${path}"; \
+	done > /tmp/MANIFEST
+	mv -f /tmp/MANIFEST $@
+
+buildrpms:
+	make -f Makefile srpms
+	mkdir -p _build/RPMS/xen-mock
+	for i in $(shell /bin/ls /var/xen-mock/*.rpm); do \
+		cp -a `readlink $${i}` _build/RPMS/xen-mock || true; \
+	done
+	createrepo _build/RPMS
+	make -f Makefile
+	rm -rf _build/RPMS/xen-mock
+	cp -r _build/RPMS /output/perf-tools/
+	rm -rf /output/perf-tools/RPMS/repodata
+	rm -rf /output/perf-tools/RPMS/x86_64/*.src.rpm
+	rm -rf /output/perf-tools/RPMS/x86_64/*.log
+	cp -r _build/SRPMS /output/perf-tools/
+
+
+
