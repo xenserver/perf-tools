@@ -1,1 +1,4 @@
-*.spec
+_build
+RPMS
+SRPMS
+SOURCES/*.tar.gz
