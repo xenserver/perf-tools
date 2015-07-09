@@ -28,16 +28,16 @@ developing applications that use %{name}.
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/lib64
-install -m 644 nvml/lib/libnvidia-ml.so %{buildroot}/usr/lib64/libnvidia-ml.so
-install -m 644 nvml/lib/libnvidia-ml.so.1 %{buildroot}/usr/lib64/libnvidia-ml.so.1
+mkdir -p %{buildroot}%{_libdir}
+install -m 644 nvml/lib/libnvidia-ml.so %{buildroot}%{_libdir}/libnvidia-ml.so
+install -m 644 nvml/lib/libnvidia-ml.so.1 %{buildroot}%{_libdir}/libnvidia-ml.so.1
 mkdir -p %{buildroot}/usr/include
 install -m 644 nvml/include/nvml.h %{buildroot}/usr/include/nvml.h
 
 %files
 %defattr(-,root,root,-)
-/usr/lib64/libnvidia-ml.so
-/usr/lib64/libnvidia-ml.so.1
+%{_libdir}/libnvidia-ml.so
+%{_libdir}/libnvidia-ml.so.1
 
 %files          devel
 %defattr(-,root,root,-)
