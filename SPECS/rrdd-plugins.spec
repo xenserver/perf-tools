@@ -55,6 +55,7 @@ exit 0
 
 %files
 %defattr(-,root,root,-)
+/etc/logrotate.d/xcp-rrdd-plugins
 /etc/rc.d/init.d/xcp-rrdd-plugins
 /etc/sysconfig/xcp-rrdd-plugins
 /opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-iostat
