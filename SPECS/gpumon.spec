@@ -27,19 +27,14 @@ metrics.
 %setup -q
 
 %build
-mkdir -p %{buildroot}
 DESTDIR=%{buildroot} %{__make}
 
 %check
 %{__make} test
 
 %install
-rm -rf %{buildroot}
 DESTDIR=%{buildroot} %{__make} install
-%{__install} -D -m 0755 %{SOURCE1} %{buildroot}etc/rc.d/init.d/xcp-rrdd-gpumon
-
-%clean
-rm -rf %{buildroot}
+%{__install} -D -m 0755 %{SOURCE1} %{buildroot}%{_sysconfdir}/rc.d/init.d/xcp-rrdd-gpumon
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add xcp-rrdd-gpumon
@@ -51,8 +46,7 @@ exit 0
 exit 0
 
 %files
-%defattr(-,root,root,-)
-/etc/rc.d/init.d/xcp-rrdd-gpumon
+%{_sysconfdir}/rc.d/init.d/xcp-rrdd-gpumon
 /opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-gpumon
 
 %changelog
