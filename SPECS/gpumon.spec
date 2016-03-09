@@ -9,6 +9,7 @@ Group:          System/Hypervisor
 License:        LGPL+linking exception
 URL:            https://github.com/xenserver/gpumon
 Source0:        git://github.com/xenserver/gpumon
+Source1:        init.d-rrdd-gpumon
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 BuildRequires:  gdk-devel
 BuildRequires:  ocaml
@@ -35,6 +36,7 @@ DESTDIR=%{buildroot} %{__make}
 %install
 rm -rf %{buildroot}
 DESTDIR=%{buildroot} %{__make} install
+%{__install} -D -m 0755 %{SOURCE1} %{buildroot}etc/rc.d/init.d/xcp-rrdd-gpumon
 
 %clean
 rm -rf %{buildroot}
