@@ -9,7 +9,7 @@ Group:          System/Hypervisor
 License:        LGPL+linking exception
 URL:            https://github.com/xenserver/gpumon
 Source0:        git://github.com/xenserver/gpumon
-Source1:        init.d-rrdd-gpumon
+Source1:        xcp-rrdd-gpumon.service
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 BuildRequires:  gdk-devel
 BuildRequires:  ocaml
@@ -18,6 +18,11 @@ BuildRequires:  ocaml-rrdd-plugin-devel
 BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-xenstore-clients-devel
+BuildRequires:  systemd-devel
+
+Requires(post):   systemd
+Requires(preun):  systemd
+Requires(postun): systemd
 
 %description
 This package contains a plugin registering to the RRD daemon and exposing GPU
@@ -34,21 +39,24 @@ DESTDIR=%{buildroot} %{__make}
 
 %install
 DESTDIR=%{buildroot} %{__make} install
-%{__install} -D -m 0755 %{SOURCE1} %{buildroot}%{_sysconfdir}/rc.d/init.d/xcp-rrdd-gpumon
+%{__install} -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}/xcp-rrdd-gpumon.service
 
 %post
-[ ! -x /sbin/chkconfig ] || chkconfig --add xcp-rrdd-gpumon
-exit 0
+%systemd_post xcp-rrdd-gpumon.service
 
 %preun
-# Run chkconfig --del if this is an uninstall (rather than an upgrade)
-[ $1 -eq 0 ] && [ -x /sbin/chkconfig ] && chkconfig --del xcp-rrdd-gpumon
-exit 0
+%systemd_preun xcp-rrdd-gpumon.service
+
+%postun
+%systemd_postun_with_restart xcp-rrdd-gpumon.service
 
 %files
-%{_sysconfdir}/rc.d/init.d/xcp-rrdd-gpumon
 /opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-gpumon
+%{_unitdir}/xcp-rrdd-gpumon.service
 
 %changelog
+* Thu Mar 10 2016 Si Beaumont <simon.beaumont@citrix.com> - 0.1.0-2
+- Package for systemd
+
 * Mon Nov 10 2014 John Else <john.else@citrix.com> - 0.1.0-1
 - Initial package for planex

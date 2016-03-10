@@ -1,0 +1,11 @@
+[Unit]
+Description=GPU monitor RRD plugin
+After=xcp-rrdd.service
+Requires=xcp-rrdd.service
+
+[Service]
+Environment=OCAMLRUNPARAM=b
+ExecStart=/opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-gpumon
+
+[Install]
+WantedBy=multi-user.target
