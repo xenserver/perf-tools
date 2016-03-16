@@ -1,0 +1,18 @@
+[Unit]
+Description=XCP RRD daemon plugins
+After=network-online.target xenstored.service xcp-rrdd.service
+Conflicts=shutdown.target
+
+[Service]
+Type=forking
+Restart=no
+TimeoutSec=5min
+IgnoreSIGPIPE=no
+KillMode=process
+GuessMainPID=no
+RemainAfterExit=yes
+ExecStart=/opt/xensource/libexec/xcp-rrdd-plugins-init start
+ExecStop=/opt/xensource/libexec/xcp-rrdd-plugins-init stop
+
+[Install]
+WantedBy=multi-user.target
