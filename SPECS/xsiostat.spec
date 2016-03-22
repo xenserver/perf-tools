@@ -10,6 +10,7 @@ Group:          Development/Other
 URL:            https://github.com/xenserver/xsiostat/
 Source0:        git://github.com/xenserver/xsiostat
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:  blktap-devel
 BuildRequires:  xen-libs-devel
 
 %description
