@@ -1,7 +1,8 @@
 [Unit]
 Description=GPU monitor RRD plugin
-After=xcp-rrdd.service
+After=xcp-rrdd.service syslog.target
 Requires=xcp-rrdd.service
+Wants=syslog.target
 
 [Service]
 Environment=OCAMLRUNPARAM=b

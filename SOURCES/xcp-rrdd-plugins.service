@@ -1,6 +1,7 @@
 [Unit]
 Description=XCP RRD daemon plugins
-After=network-online.target xenstored.service xcp-rrdd.service
+Wants=syslog.target
+After=network-online.target xenstored.service xcp-rrdd.service syslog.target
 Conflicts=shutdown.target
 
 [Service]
