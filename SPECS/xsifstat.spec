@@ -1,14 +1,11 @@
-%define planex_version 0.0.0
-%define planex_release 1
-
 Name:           xsifstat
-Version:        %{planex_version}
-Release:        %{planex_release}
+Version:        1.0.0
+Release:        1%{?dist}
 Summary:        Tool for visualising XenServer VIF metrics
 License:        LGPL+linking exception
 Group:          Development/Other
 URL:            https://github.com/xenserver/xsifstat/
-Source0:        git://github.com/xenserver/xsifstat
+Source0:        https://github.com/xenserver/xsifstat/archive/%{version}/xsifstat-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Requires:       python
 
@@ -35,5 +32,8 @@ rm -rf %{buildroot}
 /opt/xensource/debug/xsifstat
 
 %changelog
+* Tue Apr 26 2016 Si Beaumont <simon.beaumont@citrix.com> - 1.0.0-1
+- Update to 1.0.0
+
 * Fri Jul 11 2014 John Else <john.else@citrix.com> - 0.2.0-1
 - Initial package for planex
