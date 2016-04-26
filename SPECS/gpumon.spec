@@ -1,14 +1,11 @@
-%define planex_version 0.0.0
-%define planex_release 1
-
 Name:           gpumon
-Version:        %{planex_version}
-Release:        %{planex_release}
+Version:        0.2.0
+Release:        1%{?dist}
 Summary:        RRDD GPU metrics plugin
 Group:          System/Hypervisor
 License:        LGPL+linking exception
 URL:            https://github.com/xenserver/gpumon
-Source0:        git://github.com/xenserver/gpumon
+Source0:        https://github.com/xenserver/gpumon/archive/%{version}/gpumon-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 BuildRequires:  gdk-devel
 BuildRequires:  ocaml
@@ -54,5 +51,8 @@ exit 0
 /opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-gpumon
 
 %changelog
+* Tue Apr 26 2016 Si Beaumont <simon.beaumont@citrix.com> - 0.2.0-1
+- Update to 0.2.0
+
 * Mon Nov 10 2014 John Else <john.else@citrix.com> - 0.1.0-1
 - Initial package for planex
