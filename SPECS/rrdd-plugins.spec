@@ -1,5 +1,5 @@
 Name:           rrdd-plugins
-Version:        1.0.0
+Version:        1.0.1
 Release:        1%{?dist}
 Summary:        RRDD metrics plugins
 License:        LGPL+linking exception
@@ -8,7 +8,7 @@ URL:            https://github.com/xenserver/rrdd-plugins/
 Source0:        https://github.com/xenserver/rrdd-plugins/archive/%{version}/rrdd-plugins-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
-BuildRequires:  omake
+BuildRequires:  oasis
 BuildRequires:  blktap-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml-rrdd-plugin-devel
@@ -62,6 +62,9 @@ exit 0
 /etc/xensource/bugtool/xcp-rrdd-plugins/stuff.xml
 
 %changelog
+* Mon May 16 2016 John Else <john.else@citrix.com> - 1.0.1-1
+- Update to 1.0.1
+
 * Tue Apr 26 2016 Si Beaumont <simon.beaumont@citrix.com> - 1.0.0-1
 - Update to 1.0.0
 
