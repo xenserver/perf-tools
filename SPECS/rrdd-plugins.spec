@@ -8,7 +8,7 @@ URL:            https://github.com/xenserver/rrdd-plugins/
 Source0:        https://github.com/xenserver/rrdd-plugins/archive/%{version}/rrdd-plugins-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
-BuildRequires:  omake
+BuildRequires:  oasis
 BuildRequires:  blktap-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml-rrdd-plugin-devel
