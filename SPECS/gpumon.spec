@@ -1,6 +1,6 @@
 Name:           gpumon
 Version:        0.2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        RRDD GPU metrics plugin
 Group:          System/Hypervisor
 License:        LGPL+linking exception
@@ -14,6 +14,10 @@ BuildRequires:  ocaml-rrdd-plugin-devel
 BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-xenstore-clients-devel
+
+Requires(post): /sbin/chkconfig
+Requires(preun): /sbin/chkconfig
+Requires(preun): /sbin/service
 
 %description
 This package contains a plugin registering to the RRD daemon and exposing GPU
@@ -37,13 +41,25 @@ DESTDIR=%{buildroot} %{__make} install
 rm -rf %{buildroot}
 
 %post
-[ ! -x /sbin/chkconfig ] || chkconfig --add xcp-rrdd-gpumon
-exit 0
+case $1 in
+  1) # install
+    /sbin/chkconfig --add xcp-rrdd-gpumon
+    ;;
+  2) # upgrade
+    /sbin/chkconfig --del xcp-rrdd-gpumon
+    /sbin/chkconfig --add xcp-rrdd-gpumon
+    ;;
+esac
 
 %preun
-# Run chkconfig --del if this is an uninstall (rather than an upgrade)
-[ $1 -eq 0 ] && [ -x /sbin/chkconfig ] && chkconfig --del xcp-rrdd-gpumon
-exit 0
+case $1 in
+  0) # uninstall
+    /sbin/service xcp-rrdd-gpumon stop >/dev/null 2>&1 || :
+    /sbin/chkconfig --del xcp-rrdd-gpumon
+    ;;
+  1) # upgrade
+    ;;
+esac
 
 %files
 %defattr(-,root,root,-)
@@ -51,6 +67,10 @@ exit 0
 /opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-gpumon
 
 %changelog
+* Mon May 16 2016 Si Beaumont <simon.beaumont@citrix.com> - 0.2.0-1
+- Re-run chkconfig on upgrade
+- Stop service on uninstall
+
 * Tue Apr 26 2016 Si Beaumont <simon.beaumont@citrix.com> - 0.2.0-1
 - Update to 0.2.0
 

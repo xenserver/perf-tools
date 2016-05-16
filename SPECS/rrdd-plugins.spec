@@ -1,6 +1,6 @@
 Name:           rrdd-plugins
 Version:        1.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        RRDD metrics plugins
 License:        LGPL+linking exception
 Group:          System/Hypervisor
@@ -23,6 +23,10 @@ BuildRequires:  xen-libs-devel
 Requires:       xsifstat
 Requires:       xsiostat
 
+Requires(post): /sbin/chkconfig
+Requires(preun): /sbin/chkconfig
+Requires(preun): /sbin/service
+
 %description
 This package contains plugins registering to the RRD daemon and exposing
 various metrics.
@@ -42,13 +46,25 @@ DESTDIR=%{buildroot} %{__make} install
 rm -rf %{buildroot}
 
 %post
-[ -x /sbin/chkconfig ] && chkconfig --add xcp-rrdd-plugins
-exit 0
+case $1 in
+  1) # install
+    /sbin/chkconfig --add xcp-rrdd-plugins
+    ;;
+  2) # upgrade
+    /sbin/chkconfig --del xcp-rrdd-plugins
+    /sbin/chkconfig --add xcp-rrdd-plugins
+    ;;
+esac
 
 %preun
-# Run chkconfig --del if this is an uninstall (rather than an upgrade)
-[ $1 -eq 0 ] && [ -x /sbin/chkconfig ] && chkconfig --del xcp-rrdd-plugins
-exit 0
+case $1 in
+  0) # uninstall
+    /sbin/service xcp-rrdd-plugins stop >/dev/null 2>&1 || :
+    /sbin/chkconfig --del xcp-rrdd-plugins
+    ;;
+  1) # upgrade
+    ;;
+esac
 
 %files
 %defattr(-,root,root,-)
@@ -62,6 +78,10 @@ exit 0
 /etc/xensource/bugtool/xcp-rrdd-plugins/stuff.xml
 
 %changelog
+* Mon May 16 2016 Si Beaumont <simon.beaumont@citrix.com> - 1.0.0-2
+- Re-run chkconfig on upgrade
+- Stop service on uninstall
+
 * Tue Apr 26 2016 Si Beaumont <simon.beaumont@citrix.com> - 1.0.0-1
 - Update to 1.0.0
 
