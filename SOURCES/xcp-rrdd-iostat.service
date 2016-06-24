@@ -1,0 +1,11 @@
+[Unit]
+Description=XCP RRD daemon iostat plugin
+After=xcp-rrdd.service
+Requires=xcp-rrdd.service
+
+[Service]
+ExecStart=/opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-iostat
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target
