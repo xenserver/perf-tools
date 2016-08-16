@@ -1,6 +1,6 @@
 Name:           gpumon
-Version:        0.2.0
-Release:        2%{?dist}
+Version:        0.3.0
+Release:        1%{?dist}
 Summary:        RRDD GPU metrics plugin
 Group:          System/Hypervisor
 License:        LGPL+linking exception
@@ -67,6 +67,9 @@ esac
 /opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-gpumon
 
 %changelog
+* Tue Aug 16 2016 Christian Lindig <christian.lindig@citrix.com> - 0.3.0-1
+- Update to 0.3.0 for new upstream release
+
 * Mon May 16 2016 Si Beaumont <simon.beaumont@citrix.com> - 0.2.0-1
 - Re-run chkconfig on upgrade
 - Stop service on uninstall
