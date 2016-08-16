@@ -1,6 +1,6 @@
 Name:           rrdd-plugins
-Version:        1.0.1
-Release:        3%{?dist}
+Version:        1.0.2
+Release:        1%{?dist}
 Summary:        RRDD metrics plugins
 License:        LGPL+linking exception
 Group:          System/Hypervisor
@@ -78,6 +78,10 @@ esac
 /etc/xensource/bugtool/xcp-rrdd-plugins/stuff.xml
 
 %changelog
+* Tue Aug 16 2016 Christian Lindig <christian.lindig@citrix.com> - 1.0.2-1
+- Update to 1.0.2
+- Bump version to match new upstream version
+
 * Mon May 16 2016 John Else <john.else@citrix.com> - 1.0.1-3
 - Update to 1.0.1
 - Bump release to 3 for upgrade against old versions
