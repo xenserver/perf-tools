@@ -5,6 +5,7 @@ Requires=xcp-rrdd.service
 
 [Service]
 ExecStart=/opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-squeezed
+StandardOutput=null
 StandardError=null
 
 [Install]

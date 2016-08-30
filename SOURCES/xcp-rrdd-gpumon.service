@@ -8,6 +8,7 @@ Wants=syslog.target
 Environment=OCAMLRUNPARAM=b
 ExecStart=/opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-gpumon
 SuccessExitStatus=0 2
+StandardOutput=null
 StandardError=null
 
 [Install]
