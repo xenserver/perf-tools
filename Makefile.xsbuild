@@ -6,17 +6,7 @@ FETCH_EXTRA_FLAGS=--mirror file:///distfiles/ocaml2
 
 .PHONY: buildrpms perf-tools
 
-perf-tools: buildrpms /output/perf-tools/SOURCES/MANIFEST 
-
-/output/perf-tools/SOURCES/MANIFEST: buildrpms
-	mkdir /output/perf-tools/SOURCES
-	for i in $(shell /bin/ls -1 SRPMS/*.rpm); do \
-		path=$${i}; \
-		echo -n "api-libs "; \
-		rpm --qf %{License} -qp $${path} | sed -e 's/ /_/g'; \
-		echo " file $${path}"; \
-	done > /tmp/MANIFEST
-	mv -f /tmp/MANIFEST $@
+perf-tools: buildrpms
 
 buildrpms:
 	make -f Makefile srpms
