@@ -1,6 +1,6 @@
 Name:           gpumon
-Version:        0.3.0
-Release:        3%{?dist}
+Version:        0.3.2
+Release:        1%{?dist}
 Summary:        RRDD GPU metrics plugin
 Group:          System/Hypervisor
 License:        LGPL+linking exception
@@ -49,6 +49,9 @@ DESTDIR=%{buildroot} %{__make} install
 %{_unitdir}/xcp-rrdd-gpumon.service
 
 %changelog
+* Thu Dec 15 2016 Rob Hoes <rob.hoes@citrix.com> - 0.3.2-1
+- git: Add metadata to the result of `git archive`
+
 * Mon Nov 21 2016 Rob Hoes <rob.hoes@citrix.com> - 0.3.0-3
 - Install systemd service files with 644 permissions (non-executable)
 
