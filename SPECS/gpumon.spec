@@ -49,6 +49,15 @@ DESTDIR=%{buildroot} %{__make} install
 %{_unitdir}/xcp-rrdd-gpumon.service
 
 %changelog
+* Thu Dec 15 2016 Rob Hoes <rob.hoes@citrix.com> - 0.3.2-1
+- git: Add metadata to the result of `git archive`
+
+* Mon Nov 21 2016 Rob Hoes <rob.hoes@citrix.com> - 0.3.1-2
+- Install systemd service files with 644 permissions (non-executable)
+
+* Wed Oct 19 2016 Euan Harris <euan.harris@citrix.com> - 0.3.1-1
+- Remove final vestiges of previous init system
+
 * Mon Aug 22 2016 Rafal Mielniczuk <rafal.mielniczuk@citrix.com> - 0.3.0-2
 - Package for systemd
 
