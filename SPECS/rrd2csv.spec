@@ -5,7 +5,7 @@ Summary:        Tool for converting Xen API RRDs to CSV
 License:        LGPL+linking exception
 Group:          System/Hypervisor
 URL:            https://github.com/xenserver/rrd2csv/
-Source0:        https://github.com/xenserver/rrd2csv/archive/%{version}/rrd2csv-%{version}.tar.gz
+Source0:        https://github.com/xenserver/rrd2csv/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
 BuildRequires:  omake

@@ -5,7 +5,7 @@ Summary:        RRDD GPU metrics plugin
 Group:          System/Hypervisor
 License:        LGPL+linking exception
 URL:            https://github.com/xenserver/gpumon
-Source0:        https://github.com/xenserver/gpumon/archive/%{version}/gpumon-%{version}.tar.gz
+Source0:        https://github.com/xenserver/gpumon/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        xcp-rrdd-gpumon.service
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 BuildRequires:  gdk-devel

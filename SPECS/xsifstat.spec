@@ -5,7 +5,7 @@ Summary:        Tool for visualising XenServer VIF metrics
 License:        LGPL+linking exception
 Group:          Development/Other
 URL:            https://github.com/xenserver/xsifstat/
-Source0:        https://github.com/xenserver/xsifstat/archive/%{version}/xsifstat-%{version}.tar.gz
+Source0:        https://github.com/xenserver/xsifstat/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Requires:       python
 

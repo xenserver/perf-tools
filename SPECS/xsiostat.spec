@@ -5,7 +5,7 @@ Summary:        Tool for visualising XenServer VBD metrics
 License:        LGPL+linking exception
 Group:          Development/Other
 URL:            https://github.com/xenserver/xsiostat/
-Source0:        https://github.com/xenserver/xsiostat/archive/%{version}/xsiostat-%{version}.tar.gz
+Source0:        https://github.com/xenserver/xsiostat/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  blktap-devel
 BuildRequires:  xen-libs-devel

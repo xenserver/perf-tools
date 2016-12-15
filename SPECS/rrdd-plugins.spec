@@ -1,6 +1,3 @@
-%define planex_version 0.0.0
-%define planex_release 2
-
 Name:           rrdd-plugins
 Version:        1.0.3
 Release:        1%{?dist}
@@ -8,7 +5,7 @@ Summary:        RRDD metrics plugins
 License:        LGPL+linking exception
 Group:          System/Hypervisor
 URL:            https://github.com/xenserver/rrdd-plugins/
-Source0:        https://github.com/xenserver/rrdd-plugins/archive/v%{version}/rrdd-plugins-%{version}.tar.gz
+Source0:        https://github.com/xenserver/rrdd-plugins/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        xcp-rrdd-iostat.service
 Source2:        xcp-rrdd-squeezed.service
 Source3:        xcp-rrdd-xenpm.service
