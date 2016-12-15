@@ -1,11 +1,11 @@
 Name:           xsifstat
-Version:        1.0.0
+Version:        1.0.1
 Release:        1%{?dist}
 Summary:        Tool for visualising XenServer VIF metrics
 License:        LGPL+linking exception
 Group:          Development/Other
 URL:            https://github.com/xenserver/xsifstat/
-Source0:        https://github.com/xenserver/xsifstat/archive/%{version}/xsifstat-%{version}.tar.gz
+Source0:        https://github.com/xenserver/xsifstat/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Requires:       python
 
@@ -32,6 +32,9 @@ rm -rf %{buildroot}
 /opt/xensource/debug/xsifstat
 
 %changelog
+* Thu Dec 15 2016 Rob Hoes <rob.hoes@citrix.com> - 1.0.1-1
+- git: Add metadata to the result of `git archive`
+
 * Tue Apr 26 2016 Si Beaumont <simon.beaumont@citrix.com> - 1.0.0-1
 - Update to 1.0.0
 
