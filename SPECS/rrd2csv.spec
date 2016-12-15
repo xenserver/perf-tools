@@ -1,5 +1,5 @@
 Name:           rrd2csv
-Version:        1.0.1
+Version:        1.0.2
 Release:        1%{?dist}
 Summary:        Tool for converting Xen API RRDs to CSV
 License:        LGPL+linking exception
@@ -38,7 +38,10 @@ rm -rf %{buildroot}
 /opt/xensource/man/man1/rrd2csv.1.man
 
 %changelog
-*Tue Aug 16 2016 Christian Lindig <christian.lindig@citrix.com> - 1.0.1-1
+* Thu Dec 15 2016 Rob Hoes <rob.hoes@citrix.com> - 1.0.2-1
+- git: Add metadata to the result of `git archive`
+
+* Tue Aug 16 2016 Christian Lindig <christian.lindig@citrix.com> - 1.0.1-1
 - Bump version to track new upstream release
 
 * Tue Apr 26 2016 Si Beaumont <simon.beaumont@citrix.com> - 1.0.0-1

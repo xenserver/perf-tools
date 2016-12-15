@@ -1,6 +1,6 @@
 Name:           gpumon
-Version:        0.3.0
-Release:        2%{?dist}
+Version:        0.3.2
+Release:        1%{?dist}
 Summary:        RRDD GPU metrics plugin
 Group:          System/Hypervisor
 License:        LGPL+linking exception

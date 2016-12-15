@@ -1,5 +1,5 @@
 Name:           xsiostat
-Version:        1.0.0
+Version:        1.0.1
 Release:        1%{?dist}
 Summary:        Tool for visualising XenServer VBD metrics
 License:        LGPL+linking exception
@@ -33,6 +33,9 @@ rm -rf %{buildroot}
 /opt/xensource/debug/xsiostat
 
 %changelog
+* Thu Dec 15 2016 Rob Hoes <rob.hoes@citrix.com> - 1.0.1-1
+- git: Add metadata to the result of `git archive`
+
 * Tue Apr 26 2016 Si Beaumont <simon.beaumont@citrix.com> - 1.0.0-1
 - Update to 1.0.0
 
