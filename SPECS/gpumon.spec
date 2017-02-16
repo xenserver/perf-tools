@@ -1,6 +1,6 @@
 Name:           gpumon
 Version:        0.3.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        RRDD GPU metrics plugin
 Group:          System/Hypervisor
 License:        LGPL+linking exception
@@ -42,13 +42,16 @@ DESTDIR=%{buildroot} %{__make} install
 %systemd_preun xcp-rrdd-gpumon.service
 
 %postun
-%systemd_postun_with_restart xcp-rrdd-gpumon.service
+%systemd_postun xcp-rrdd-gpumon.service
 
 %files
 /opt/xensource/libexec/xcp-rrdd-plugins/xcp-rrdd-gpumon
 %{_unitdir}/xcp-rrdd-gpumon.service
 
 %changelog
+* Wed Feb 15 2017 Frederico Mazzone <frederico.mazzone@citrix.com> - 0.3.2-2
+- CA-243676: Do not restart toolstack services on RPM upgrade
+
 * Thu Dec 15 2016 Rob Hoes <rob.hoes@citrix.com> - 0.3.2-1
 - git: Add metadata to the result of `git archive`
 
