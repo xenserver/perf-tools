@@ -1,6 +1,6 @@
 Name:           rrd2csv
 Version:        1.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tool for converting Xen API RRDs to CSV
 License:        LGPL+linking exception
 Group:          System/Hypervisor
@@ -38,6 +38,10 @@ rm -rf %{buildroot}
 /opt/xensource/man/man1/rrd2csv.1.man
 
 %changelog
+* Mon Sep 18 2017 Frederico Mazzone <frederico.mazzone@citrix.com> - 1.0.0-2
+- HFX-1986: Compile against new xen-api-libs-transitional which
+  contains the fix for CA-245559
+
 * Tue Apr 26 2016 Si Beaumont <simon.beaumont@citrix.com> - 1.0.0-1
 - Update to 1.0.0
 
