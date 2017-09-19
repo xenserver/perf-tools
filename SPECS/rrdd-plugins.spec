@@ -1,11 +1,12 @@
 Name:           rrdd-plugins
 Version:        1.0.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        RRDD metrics plugins
 License:        LGPL+linking exception
 Group:          System/Hypervisor
 URL:            https://github.com/xenserver/rrdd-plugins/
 Source0:        https://github.com/xenserver/rrdd-plugins/archive/%{version}/rrdd-plugins-%{version}.tar.gz
+Patch0:         HFX-1989-CA-248332-Fix-race-condition-in-iostat.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
 BuildRequires:  oasis
@@ -33,6 +34,7 @@ various metrics.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 mkdir -p %{buildroot}
@@ -78,6 +80,10 @@ esac
 /etc/xensource/bugtool/xcp-rrdd-plugins/stuff.xml
 
 %changelog
+* Tue Sep 19 2017 Frederico Mazzone <frederico.mazzone@citrix.com> - 1.0.1-4
+- HFX-1989: Add patch for backporting fix for CA-248332: Fix race
+  condition in iostat while updating VDI-to-VM map
+
 * Mon Sep 18 2017 Frederico Mazzone <frederico.mazzone@citrix.com> - 1.0.1-3
 - HFX-1986: Compile against new xen-api-libs-transitional which
   contains the fix for CA-245559
